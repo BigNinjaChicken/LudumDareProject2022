@@ -23,6 +23,9 @@ public class HealthPack : MonoBehaviour
         {
             PlayerHealth playerHealthScript = other.GetComponent<PlayerHealth>();
             playerHealthScript.pickUpHealth();
+
+            GameManager gameManagerScript = other.GetComponent<GameManager>();
+            gameManagerScript.spawnHealthPickUp();
         }
 
         Destroy(gameObject);

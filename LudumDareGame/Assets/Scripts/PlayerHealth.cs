@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= healthDecayMultiplier;
         if (currentHealth >= maxHealth) currentHealth = maxHealth;
+        if (currentHealth <= 0) currentHealth = 0;
 
         currentPanelMaskSize = currentHealth * (PanelMaskSize / maxHealth);
         mask.padding = new Vector4(0, 0, 0, currentPanelMaskSize);
