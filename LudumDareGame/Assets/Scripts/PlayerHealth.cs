@@ -17,6 +17,11 @@ public class PlayerHealth : MonoBehaviour
     public float healthEffectivenessDecrese = 4f;
     public float PanelMaskSize = 130f;
     float currentPanelMaskSize = 130f;
+    public GameObject gameManager;
+
+    [Header("Enemy Damage")]
+    public float enemyDamageMultiplier = 1.5f;
+    public int enemysTouchingPlayer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +33,8 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         currentHealth -= healthDecayMultiplier;
+        if (enemysTouchingPlayer >= 1) currentHealth -= enemyDamageMultiplier;
+
         if (currentHealth >= maxHealth) currentHealth = maxHealth;
         if (currentHealth <= 0) currentHealth = 0;
 
@@ -37,7 +44,20 @@ public class PlayerHealth : MonoBehaviour
 
     public void pickUpHealth()
     {
+        StimManager gameManagerScript = gameManager.GetComponent<StimManager>();
+        gameManagerScript.spawnHealthPickUp();
+
         currentHealth += healthPickUpAmount;
         healthPickUpAmount -= healthEffectivenessDecrese;
+    }
+
+    public void InsideEnemy()
+    {
+        enemysTouchingPlayer++;
+    }
+
+    public void OutsideEnemy()
+    {
+        enemysTouchingPlayer--;
     }
 }
