@@ -12,6 +12,9 @@ public class EnemyController : MonoBehaviour
     private GameObject spawnNodeGroupObject;
     List<EnemySpawnNode> spawnNodes;
 
+    // Animation
+    public Animator animator;
+
     // How far away the enemy can be until the enemy picks a new spawn pos
     public float DistanceUntilRespawn = 20f;
 
@@ -35,6 +38,8 @@ public class EnemyController : MonoBehaviour
         if (Vector3.Distance(goal.position, transform.position) > DistanceUntilRespawn)
         {
             findNewSpawn();
+
+            // Play Animation
         }
     }
 
